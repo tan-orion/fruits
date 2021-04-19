@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    img{
+        width: 50px;
+    }
+</style>
+<body>
+<button onclick="addFruit()">Thêm hoa quả</button>
+<table id="fruit" border="1px"></table>
+<script>
+
+    class Fruit {
+        constructor(_id, _name, _price) {
+            this.id = _id;
+            this.name = _name;
+            this.price = _price;
+
+        }
+    }
+
+    let mango = new Fruit(10, "Mango", 10000);
+    let apple = new Fruit(10, "apple", 10000);
+    let banana = new Fruit(10, "banana", 10000);
+    let fruits=[mango,apple,banana];
+    function addFruit() {
+        let id = prompt('Nhập id');
+        let name = prompt('Nhập tên');
+        let price = prompt('Nhập giá');
+        let fruit = new Fruit(id,name,price);
+
+        fruits.push(fruit);
+        display();
+    }
+
+    function display() {
+        let str = '';
+        for (let i = 0; i < fruits.length; i++) {
+             str += '<tr>';
+            str += '<td>' + fruits[i].id + '</td>';
+            str += '<td>' + fruits[i].name + '</td>';
+            str += '<td>' + fruits[i].price + '</td>';
+            str+='<td><button onclick="editFruit('+i+')">Sửa</button></td>'
+            str+='<td><button onclick="deleteFruit('+i+')">xóa</button></td>'
+             str += "</tr>";
+
+
+        }
+        document.getElementById('fruit').innerHTML = str;
+    }
+
+    display();
+    function deleteFruit(index){
+        let check=confirm("do you want delete a fruit?");
+        if(check){
+            fruits.slice(index,1);
+            display()
+        }
+    }
+    function editFruit(index){
+
+        fruits[index].id=prompt("enter id",fruits[index]);
+        fruits[index].name=prompt("enter name",fruits[index]);
+        fruits[index].price=prompt("enter gender",fruits[index]);
+        display()
+
+    }
+
+    </script>
+</body>
+</html>
